@@ -13,10 +13,13 @@
 @end
 
 @implementation ViewController
+@synthesize webView, activityIndicator;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSURL *url = [NSURL URLWithString:@"https://www.apple.com"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,4 +27,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [activityIndicator startAnimating];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [activityIndicator stopAnimating];
+}
 @end
